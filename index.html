@@ -31,10 +31,14 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill" style="width: 0%"></div>
             </div>
+            <p class="hint-text">点击英雄查看详情</p>
         </div>
 
         <div class="collection-section">
-            <h3>📚 已收集的英雄</h3>
+            <div class="section-header">
+                <h3>📚 英雄图鉴</h3>
+                <button class="reset-button" onclick="resetCollection()" title="清空收藏记录">🔄 重置</button>
+            </div>
             <div class="collection-grid" id="collectionGrid">
                 <p class="empty-message">还没有收集到任何英雄</p>
             </div>
