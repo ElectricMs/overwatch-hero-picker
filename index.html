@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>守望先锋本命英雄抽取器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🎯 守望先锋本命英雄抽取器</h1>
+        <p class="subtitle">快来看看你的本命英雄是谁！</p>
+
+        <div class="draw-area">
+            <div class="hero-display" id="heroDisplay">
+                <div class="hero-placeholder">👇</div>
+                <div class="hero-text" id="heroText">点击下方按钮开始抽取</div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="draw-button" id="drawButton">
+                <span class="button-text">长按抽取英雄</span>
+                <span class="button-icon">⚡</span>
+            </button>
+        </div>
+
+        <div class="progress-section">
+            <h3>🏆 英雄图鉴</h3>
+            <p class="progress-text">已解锁: <span id="unlockedCount">0</span> / <span id="totalCount">0</span></p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="collection-section">
+            <h3>📚 已收集的英雄</h3>
+            <div class="collection-grid" id="collectionGrid">
+                <p class="empty-message">还没有收集到任何英雄</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
