@@ -69,23 +69,38 @@ function updateProgress() {
 // 更新收集图鉴显示
 function updateCollectionGrid() {
     const grid = document.getElementById('collectionGrid');
+    const collectedSet = new Set(collectedHeroes);
 
-    if (collectedHeroes.length === 0) {
-        grid.innerHTML = '<p class="empty-message">还没有收集到任何英雄</p>';
-        return;
-    }
+    // 按角色类型分组显示所有英雄
+    let html = '';
 
-    const uniqueHeroes = [...new Set(collectedHeroes)];
-    grid.innerHTML = uniqueHeroes.map(heroKey => {
-        const [role, index] = heroKey.split('-');
-        const hero = heroes[role][index];
-        return `
-            <div class="collection-item">
-                <div class="hero-name">${hero.emoji} ${hero.name}</div>
-                <div class="hero-role">${roleMap[role]}</div>
-            </div>
-        `;
-    }).join('');
+    ['tank', 'damage', 'support'].forEach(role => {
+        const roleHeroes = heroes[role];
+        const collectedInRole = roleHeroes.filter((hero, index) => {
+            return collectedSet.has(`${role}-${index}`);
+        }).length;
+
+        html += `<div class="role-section">
+            <div class="role-title">${roleMap[role]} (${collectedInRole}/${roleHeroes.length})</div>
+            <div class="role-grid">`;
+
+        roleHeroes.forEach((hero, index) => {
+            const heroKey = `${role}-${index}`;
+            const isCollected = collectedSet.has(heroKey);
+
+            html += `
+                <div class="hero-item ${isCollected ? 'collected' : 'uncollected'}">
+                    <div class="hero-emoji">${isCollected ? hero.emoji : '❓'}</div>
+                    <div class="hero-name">${hero.name}</div>
+                    <div class="hero-status">${isCollected ? '✅' : '🔒'}</div>
+                </div>
+            `;
+        });
+
+        html += `</div></div>`;
+    });
+
+    grid.innerHTML = html;
 }
 
 // 随机抽取英雄
